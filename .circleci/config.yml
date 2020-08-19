@@ -3,9 +3,9 @@ defaults: &defaults
     - image: wilson208/circleci-awscli
 
   environment:
-    AWS_ACCESS_KEY_ID: xxxxxx
-    AWS_SECRET_ACCESS_KEY: xxxxxxxx
-    AWS_DEFAULT_REGION: ap-southeast-2
+    AWS_ACCESS_KEY_ID: ASIASVCFOX7RDK4C6F2G
+    AWS_SECRET_ACCESS_KEY: QjtLU/b9xEjMvQIkzzhWEaV1PJnGBhmp6cw5MUNn
+    AWS_DEFAULT_REGION: us-west-2
 
 version: 2
 jobs:
