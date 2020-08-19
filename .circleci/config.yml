@@ -3,8 +3,8 @@ defaults: &defaults
     - image: wilson208/circleci-awscli
 
   environment:
-    AWS_ACCESS_KEY_ID: ASIASVCFOX7RDK4C6F2G
-    AWS_SECRET_ACCESS_KEY: QjtLU/b9xEjMvQIkzzhWEaV1PJnGBhmp6cw5MUNn
+    AWS_ACCESS_KEY_ID: ASIASVCFOX7RJXVLDB57
+    AWS_SECRET_ACCESS_KEY: OxNRFZtfVUXuTZ4h1G0mhk3lKSsdJWWd7Kla4j2D
     AWS_DEFAULT_REGION: us-west-2
 
 version: 2
@@ -47,7 +47,10 @@ jobs:
           path: ~/eventBridgeSample/
       - attach_workspace:
           at: ~/eventBridgeSample/my-app
-      
+      - run:
+          command: |
+            CI=false npm run build
+            aws s3 sync build/ s3://ci-demo  --region us-west-2 --delete
       
 workflows:
   version: 2
