@@ -48,10 +48,7 @@ jobs:
           path: ~/eventBridgeSample/
       - attach_workspace:
           at: ~/eventBridgeSample/my-app
-      - run:
-          command: |
-            CI=false npm run build
-            aws s3 sync build/ s3://ci-demo  --region us-west-2 --delete
+     
       - run:
           name: On success
           when: on_success
