@@ -51,6 +51,17 @@ jobs:
           command: |
             CI=false npm run build
             aws s3 sync build/ s3://ci-demo  --region us-west-2 --delete
+      - run:
+          name: On success
+          when: on_success
+          command: |
+            aws events put-events --entries '[{ "Source": "circleci.myapp", "DetailType": "CircleCI state change", "Detail": "{ \"app\": \"myapp\", \"type\": \"success\" }"}]'
+      - run:
+          name: On fail
+          when: on_fail
+          command: |
+            aws events put-events --entries '[{ "Source": "circleci.myapp", "DetailType": "CircleCI state change", "Detail": "{ \"app\": \"myapp\", \"type\": \"fail\" }"}]'
+
       
 workflows:
   version: 2
