@@ -1,6 +1,6 @@
 # Monitoring CircleCI with Amazon EventBridge
 
-Example of building a simple solution to monitor React App CI/CD status using CircleCI, CloudWatch and EventBridge.
+Example of building a simple solution to monitor React App CI/CD status using CircleCI, CloudWatch and EventBridge
 
 ## Prerequisites
 
