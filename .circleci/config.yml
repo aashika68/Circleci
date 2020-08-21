@@ -3,9 +3,9 @@ defaults: &defaults
     - image: wilson208/circleci-awscli
 
   environment:
-    AWS_ACCESS_KEY_ID: ASIASVCFOX7RHGPJWM53
-    AWS_SECRET_ACCESS_KEY: ufWVV/B9LydW1mOTAIbbjl042PSuLlt9pS+grnau
-    AWS_SESSION_TOKEN: IQoJb3JpZ2luX2VjEG4aCXVzLXdlc3QtMiJHMEUCIQDbjbUQHv+ApTdIT7VH1JPYfBZr53ogX/9y5+z1biGpIAIgYzmwXIxhESKJ+f8k8F1raggNx7SFpHbs1eRYexVDO1sqwgIIVxABGgwxODI2ODE3ODAxOTQiDAzXfOPgyYjIQqo/VSqfAsg/WJWnTlao/xtCdOsMibT/cZo3KjsjayicjoXe7U4Sn6Q28n7pawFPHZYWkEeLGOppDSYEdr3fnHuCOCp69SKMxypGqn8zu700ZvRvqRAV9MCB6u2/LwreoiIjDTJZIepZTOSHV6KeN3+M+2tH2rDk+6g7WYz4O5mPWjr2me3tqR8cdUQMcBCm2zQXGjOTy8ehShcNGH/0OipMSWds5pD2qdiutX6kLHFjnLyZc8s3LdHNsTNYokF9viGa38CjTi+qn5tMmqx6zasH5XfzqbFQIMpbXm/CWpb8bCYA9jcoBLL6botVeduOvVtN9/uHpcuz8/zVsbzdHsmZnatn1lvoCRS5Eq8rCNgaHad3DG2rUY9xzAIkcaNvUOlLPHQ9MKm3/fkFOp0B2Ij2F+zYMs8KCml1WfO4wP6OAWcNk/ijwUjbbG7Z10ICTKM7s8bmOKdPRiQh6PSOERd0YJ1+qg5CegRhDS8tQnp/iK/oS7kHZrDaa9MdZN/F+JsrvJiUfTQuFdUCZ4GjLkVSE9uwqSKPlVEa2zv/EB9rwJ3lk1mflz6oujYFw+2gZDXTI/1GjK5DG3/qDCC9FNtTsaGXMrBFIF4Xdw==
+    AWS_ACCESS_KEY_ID: ASIASVCFOX7RJEHQRWNG
+    AWS_SECRET_ACCESS_KEY: b8f9CJmmkO6TMMHt3uetNf82h3Vj0fgiYlt3PtmQ
+    AWS_SESSION_TOKEN: IQoJb3JpZ2luX2VjEHMaCXVzLXdlc3QtMiJGMEQCIBWptgV9fk39HJ5na1FdBC09ef8qvyULb0t+7m+kKv1/AiB2yxTb1YgAw7maY6k7rpxkTPn17akayx6TpV09nl/A5yrCAghcEAEaDDE4MjY4MTc4MDE5NCIMFRZOdkfyVY3eiKlrKp8Ch1Fnfb2iCLp6YWQQs/rrfLPh52p2oZTjlcCK2kIj4eVhQ0zd6Ob9U4+pZDVGNGDuwXx8kuFbs5/U5DhElNLDJxN7MzoDCreuKNGaHimRslvAwJsPN5p+EWjjBEZMHfNBv/oZZGJ3I3JGHqrrl43Dn+SofzGMgKFhCL64nBVHHF35marJYztrtQ4h/LAoXtIa1jI/r+AJFbOaHaWoj243cwcp86ru8W3TqvXn9Pzoabw7cvNHdmSYwmWdBbSyQbaOspdOhZxmvnaFL4Kkd7MT2cAfs+OkPh9gfYSFIUPIKgCsHDGYtWn+sMU7BCO4IH7+7lNTcmpanLBL08XcyCk/OqLF+B0SsZPWis1aBIB87kJe+TuVafcp+x/qOLIYI/swwdj++QU6ngG/ekCDst1n1XO9ciKanv/JpXBcwPeCrAY0VQRffyXWU53WWlyUn35lkmYwZpnc5elH9f4X+qoRnG+yqN6biI0yESIaqf/gqI2E7bK83kmjSz6V3KDEnVgVKliZyJm/UCANUfz0bPYvPUCwp1Lpvzmnd18tpP06yd4bLaNiirCcoK+5AfwRvWgmBW/11Bj4hdO2Sam4gzzpLeDnLzxzIg==
     AWS_DEFAULT_REGION: us-west-2
 
 version: 2
@@ -48,6 +48,10 @@ jobs:
           path: ~/eventBridgeSample/
       - attach_workspace:
           at: ~/eventBridgeSample/my-app
+      - run:
+          command: |
+            CI=false npm run build
+            aws s3 sync build/ s3://ci-demo  --region us-west-2 --delete
      
       - run:
           name: On success
